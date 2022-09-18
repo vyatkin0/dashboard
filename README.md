@@ -1,5 +1,6 @@
 # dashboard
 Software development teams dashboard example
+
 It can be checked on [codesandbox](https://codesandbox.io/p/github/vyatkin0/dashboard/main)
 
 # Getting Started with Create React App
