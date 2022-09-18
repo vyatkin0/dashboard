@@ -1,0 +1,137 @@
+.container {
+    position: relative;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 16px;
+    background: white;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.07);
+    border-radius: 5px;
+}
+
+.card:focus, .card:active, .card:hover {
+    background: #DAE6FE;
+    color: #2E75F5;
+    border: none;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08), 0px 0px 6px rgba(0, 0, 0, 0.08);
+}
+
+.card:focus .leader, .card:active .leader, .card:hover .leader{
+    color: #8E8E8E;
+}
+
+.card:hover {
+    background: none;
+}
+
+.card:focus {
+    outline: 'none';
+    background: none;
+}
+
+.card {
+    display: block;
+    border: none;
+    margin-top: 8px;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: left;
+    line-height: 18px;
+    padding: 8px;
+    color: #202020;
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 5px;
+    height: 50px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  .close {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  .column {
+    width: calc(33% - 13px); /* 33% - 40/3px */
+  }
+
+.counter {
+    float: right;
+    font-weight: 500;
+    color: #202020;
+}
+
+.leader {
+    font-weight: normal;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #BDBDBD;
+}
+
+.name {
+    width: 90%;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.rightSpan {
+    float: right;
+    color: #2E75F5;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    column-gap: 20px;
+}
+
+title {
+    padding: 8px;
+}
+
+.tooltip::before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    transform: translateX(-50%);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 20px solid #DAE7FE;
+    bottom: 100%;
+    left: var(--connection-left);
+}
+
+.tooltip {
+    position: absolute;
+    background-color: #DAE7FE;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 24px;
+    height: 480px;
+}
+
+.tooltipTitle {
+    text-align: right;
+}
+
+.tooltipContent {
+    margin-top: 16px;
+    height: 100%;
+}
