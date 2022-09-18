@@ -8,10 +8,12 @@ interface StatHeaderProps {
 }
 
 const StatHeader = (props: StatHeaderProps): JSX.Element => <div className={styles.container}>
-    <span className={styles.image + ' material-symbols-outlined'}>
-        {props.image}
+    <span>
+        <span className={styles.image + ' material-symbols-outlined'}>
+            {props.image}
+        </span>
+        {props.title}
     </span>
-    {props.title}
     {props.title && props.rightText && <span style={{ color: props.rightColor || '#2E75F5' }}
         className={styles.rightSpan}>
         {props.rightText}
