@@ -17,8 +17,8 @@ export interface DoubleIndicatorsCardProps {
 
 const DoubleIndicatorsCard = (props: DoubleIndicatorsCardProps): JSX.Element => {
     const colors = ['#F4B77E', '#95A6DD'];
-    const total = props.indicators.reduce((a: any, b: any) => a + b.count, 0) || 0;
-    const width = total ? props.indicators.map((d: any) => Math.round((100 * d.count) / total) + '%') : ['50%', '50%'];
+    const total = props.indicators.reduce((a: number, b: IndicatorProps) => a + b.count, 0) || 0;
+    const width = total ? props.indicators.map((d: IndicatorProps) => Math.round((100 * d.count) / total) + '%') : ['50%', '50%'];
 
     return <>
         <StatHeader {...props.head} rightText={`Total: ${total}`} />
