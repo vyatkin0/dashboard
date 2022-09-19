@@ -94,7 +94,7 @@ const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
         }
 
         return c;
-    }, [tooltipInfo]);
+    }, [tooltipInfo, onTeamClick]);
 
     const style = tooltipInfo ? { '--connection-left': tooltipInfo.connectionLeft + 'px' } as React.CSSProperties : undefined;
 

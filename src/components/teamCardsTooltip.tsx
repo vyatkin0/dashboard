@@ -83,7 +83,7 @@ const TeamCardsTooltip = (props: TeamCardsTooltipProps): JSX.Element => {
         return () => {
             controller.abort();
         };
-    }, []);
+    }, [props.teamId]);
 
     const tooltipStyle = {
         width: tooltipWidth,
