@@ -1,6 +1,6 @@
 import StatHeader from './statHeader';
 import styles from './newCardsGroup.module.css';
-import { default as NewCard, NewCardProps } from './newCard';
+import NewCard, { NewCardProps } from './newCard';
 
 export interface NewCardsGroupProps {
     days: number;

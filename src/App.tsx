@@ -1,12 +1,12 @@
 import React from 'react';
-import { default as DoubleIndicatorsCard, DoubleIndicatorsCardProps } from './components/doubleIndicatorsCard';
-import { default as IndicatorsCardGroup, IndicatorsCardsProps } from './components/indicatorsCardsGroup';
-import { default as NewCardsGroup, NewCardsGroupProps } from './components/newCardsGroup';
-import { default as TeamCardsGroup, TeamCard } from './components/teamCardsGroup';
+import DoubleIndicatorsCard, { DoubleIndicatorsCardProps } from './components/doubleIndicatorsCard';
+import IndicatorsCardGroup, { IndicatorsCardsProps } from './components/indicatorsCardsGroup';
+import NewCardsGroup, { NewCardsGroupProps } from './components/newCardsGroup';
+import TeamCardsGroup, { TeamCard } from './components/teamCardsGroup';
 import { apiUrl } from './config';
 
 interface AppState {
-    loading?: boolean,
+    loading: boolean,
     error?: string,
     data?: any,
 }
@@ -22,14 +22,14 @@ type Action = { type: 'loading', payload: boolean }
     | { type: 'loaded', payload: any }
     | { type: 'error', payload: string };
 
-const reducer = (_state: AppState, action: Action): AppState => {
+const reducer = (state: AppState, action: Action): AppState => {
     switch (action.type) {
         case 'loading':
-            return { loading: action.payload };
+            return { error: state.error, loading: action.payload };
         case 'loaded':
-            return { data: action.payload };
+            return { data: action.payload, loading: false };
         case 'error':
-            return { error: action.payload };
+            return { error: action.payload, loading: false };
         default:
             throw new Error();
     }
@@ -97,7 +97,7 @@ const getStatsInfo = (stats: any): Stats => {
 };
 
 const App = (): JSX.Element => {
-    const [stats, dispatch] = React.useReducer(reducer, {} as AppState);
+    const [stats, dispatch] = React.useReducer(reducer, { loading: false });
 
     React.useEffect(() => {
         const controller = new AbortController();

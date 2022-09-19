@@ -1,7 +1,7 @@
 import React from 'react';
 import StatHeader from './statHeader';
-import styles from './teamCards.module.css';
-import {default as TeamCardsTooltip, tooltipWidth} from './teamCardsTooltip';
+import styles from './teamCardsGroup.module.css';
+import TeamCardsTooltip, { tooltipWidth } from './teamCardsTooltip';
 
 const tooltipPadding = 24;
 
@@ -24,44 +24,34 @@ interface TooltipInfo {
 }
 
 const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
-    const [tooltipInfo, setTooltipInfo] = React.useState(undefined as TooltipInfo|undefined);
+    const [tooltipInfo, setTooltipInfo] = React.useState(undefined as TooltipInfo | undefined);
 
-    const onClose =  React.useCallback(()=>setTooltipInfo(undefined), []);
+    const onClose = React.useCallback(() => setTooltipInfo(undefined), []);
 
     const onTeamClick = (
         teamId: number,
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         const currentTarget = e?.currentTarget as HTMLElement;
-        if (!currentTarget) {
+        const p = currentTarget?.parentElement?.parentElement?.parentElement;
+        if (!p) {
             setTooltipInfo(undefined);
             return;
         }
 
-        if (tooltipInfo?.teamId &&  tooltipInfo.teamId === teamId) {
+        if (tooltipInfo?.teamId && tooltipInfo.teamId === teamId) {
             return;
         }
 
-        const p = currentTarget?.parentElement?.parentElement?.parentElement;
         const tw = tooltipWidth + 2 * tooltipPadding;
         let left;
-        if (p) {
-            const maxRight = p.offsetLeft + p.offsetWidth;
-            if (
-                currentTarget.offsetLeft +
-                currentTarget.offsetWidth / 2 +
-                tw / 2 >
-                maxRight
-            ) {
-                left = p.offsetWidth - tw;
-            }
+        const maxRight = p.offsetLeft + p.offsetWidth;
+        if (currentTarget.offsetLeft + currentTarget.offsetWidth / 2 + tw / 2 > maxRight) {
+            left = p.offsetWidth - tw;
         }
 
         if (!left) {
-            left =
-                currentTarget.offsetLeft +
-                currentTarget.offsetWidth / 2 -
-                tw / 2;
+            left = currentTarget.offsetLeft + currentTarget.offsetWidth / 2 - tw / 2;
         }
 
         if (left < 0) {
@@ -77,23 +67,18 @@ const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
         });
     };
 
-    const cards =  React.useMemo(()=>{
+    const cards = React.useMemo(() => {
         const cardCount = Math.ceil(props.teamProducts.length / 3);
-    
+
         const c = [[], [], []] as JSX.Element[][];
-        
+
         for (let i = 0; i < 3; ++i) {
-            for (
-                let j = 0;
-                j < cardCount && i * cardCount + j < props.teamProducts.length;
-                ++j
-            ) {
+            for (let j = 0; j < cardCount && i * cardCount + j < props.teamProducts.length; ++j) {
                 const t = props.teamProducts[i * cardCount + j];
-                const cardClass =
-                    tooltipInfo && tooltipInfo.teamId === t.teamId
-                        ? styles.card + ' ' + styles.activeCard
-                        : styles.card;
-    
+                const cardClass = tooltipInfo && tooltipInfo.teamId === t.teamId
+                    ? styles.card + ' ' + styles.activeCard
+                    : styles.card;
+
                 c[i].push(
                     <button
                         key={t.teamId + j.toString() + i}
@@ -109,11 +94,9 @@ const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
         }
 
         return c;
-    }, []);
-    
-    const style = tooltipInfo ? {
-        '--connection-left': tooltipInfo.connectionLeft + 'px',
-    } as React.CSSProperties : undefined;
+    }, [tooltipInfo]);
+
+    const style = tooltipInfo ? { '--connection-left': tooltipInfo.connectionLeft + 'px' } as React.CSSProperties : undefined;
 
     const total = props.teamProducts.reduce((a: number, b: TeamCard) => a + b.count, 0) || 0;
 
@@ -125,11 +108,9 @@ const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
                 <span className={styles.rightSpan}>Total: {total}</span>
             </div>
             <div className={styles.row}>
-                {cards.map((c, i) => (
-                    <div key={i} className={styles.column}>{c}</div>
-                ))}
+                {cards.map((c, i) => <div key={i} className={styles.column}>{c}</div>)}
             </div>
-            {tooltipInfo && <TeamCardsTooltip onClose={onClose} {...tooltipInfo}/>}
+            {tooltipInfo && <TeamCardsTooltip onClose={onClose} {...tooltipInfo} />}
         </div>
     </>;
 };

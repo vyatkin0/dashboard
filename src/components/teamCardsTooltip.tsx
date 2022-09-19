@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './teamCardsTooltip.module.css';
-import { default as IndicatorsCardGroup, IndicatorsCardsProps } from './indicatorsCardsGroup';
+import IndicatorsCardGroup, { IndicatorsCardsProps } from './indicatorsCardsGroup';
 import { IndicatorProps } from './indicatorsCard';
 import { apiUrl } from '../config';
 
@@ -11,7 +11,7 @@ interface TeamCardsTooltipProps {
     connectionLeft: number;
     top: number;
     left: number;
-    onClose: ()=>void;
+    onClose: () => void;
 }
 
 interface TeamStats {
@@ -25,10 +25,10 @@ type Action =
     | { type: 'loaded'; payload: IndicatorsCardsProps[] }
     | { type: 'error'; payload: string };
 
-const reducer = (_state: TeamStats, action: Action): TeamStats => {
+const reducer = (state: TeamStats, action: Action): TeamStats => {
     switch (action.type) {
         case 'loading':
-            return { loading: action.payload };
+            return { error: state.error, loading: action.payload };
         case 'loaded':
             return { teamCards: action.payload, loading: false };
         case 'error':
@@ -64,25 +64,19 @@ const getTeamCards = (data: { products: IndicatorProps[]; productTypes: Indicato
 ];
 
 const TeamCardsTooltip = (props: TeamCardsTooltipProps): JSX.Element => {
-    const [teamStats, dispatch] = React.useReducer(
-        reducer,
-        {} as TeamStats
-    );
+    const [teamStats, dispatch] = React.useReducer(reducer, { loading: false });
 
     React.useEffect(() => {
         const controller = new AbortController();
         const signal = controller.signal;
         dispatch({ type: 'loading', payload: true });
-        fetch(`${apiUrl}/teamstats/${props.teamId}`, {
-            signal,
+        fetch(`${apiUrl}/teamstats/${props.teamId}`, { signal }).then(data => {
+            data.json().then(j => {
+                const payload = getTeamCards(j);
+                dispatch({ type: 'loaded', payload });
+            });
         })
-            .then((data) => {
-                data.json().then((payload) => {
-                    const teamCards = getTeamCards(payload);
-                    dispatch({ type: 'loaded', payload: teamCards });
-                });
-            })
-            .catch((e) => dispatch({ type: 'error', payload: e.message }))
+            .catch(e => dispatch({ type: 'error', payload: e.message }))
             .finally(() => {
                 dispatch({ type: 'loading', payload: false });
             });
@@ -108,10 +102,7 @@ const TeamCardsTooltip = (props: TeamCardsTooltipProps): JSX.Element => {
 
     return <div className={styles.tooltip} style={tooltipStyle}>
         <div className={styles.tooltipTitle}>
-            <button
-                onClick={props.onClose}
-                className={styles.close}
-            >
+            <button onClick={props.onClose} className={styles.close}>
                 <span className='material-symbols-outlined'>
                     close
                 </span>
