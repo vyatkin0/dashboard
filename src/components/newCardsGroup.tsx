@@ -1,8 +1,8 @@
 import StatHeader from './statHeader';
 import styles from './newCardsGroup.module.css';
 import NewCard, { NewCardProps } from './newCard';
-import Tooltip from "./tooltip";
-import tooltips from "../tooltips.json";
+import Tooltip from './tooltip';
+import tooltips from '../tooltips.json';
 
 export interface NewCardsGroupProps {
     days: number;
