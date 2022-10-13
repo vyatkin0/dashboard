@@ -1,1 +1,1 @@
-export const apiUrl = 'https://2obyh1-3001.preview.csb.app';
+export const apiUrl = (prefix: string)=>`https://${prefix}-ghgwgbpcva-lm.a.run.app`;

@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './newCard.module.css';
 
 export interface NewCardProps {
@@ -47,16 +48,17 @@ const bgInnerSvg = (
 
 const NewCard = (props: NewCardProps): JSX.Element => {
     const bgi = props.bg % bgColors.length || 0;
-    const styleCard = {
-        '--before-bg-image': `url('data:image/svg+xml;base64,${btoa(
-            bgInnerSvg(bgColors[bgi][1])
-        )}')`,
-    } as React.CSSProperties;
-    const styleContainer = {
-        backgroundImage: `url('data:image/svg+xml;base64,${btoa(
-            bgSvg(bgColors[bgi][0])
-        )}')`,
-    };
+    const [styleCard, styleContainer] = React.useMemo(() =>
+        [{
+            '--before-bg-image': `url('data:image/svg+xml;base64,${btoa(
+                bgInnerSvg(bgColors[bgi][1])
+            )}')`,
+        } as React.CSSProperties,
+        {
+            backgroundImage: `url('data:image/svg+xml;base64,${btoa(
+                bgSvg(bgColors[bgi][0])
+            )}')`,
+        }], [bgi]);
     return <div className={styles.card} style={styleCard}>
         <div className={styles.container} style={styleContainer}>
             {props.title}

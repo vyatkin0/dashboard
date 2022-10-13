@@ -24,11 +24,11 @@ interface TooltipInfo {
 }
 
 const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
-    const [tooltipInfo, setTooltipInfo] = React.useState(undefined as TooltipInfo | undefined);
+    const [tooltipInfo, setTooltipInfo] = React.useState<TooltipInfo>();
 
     const onClose = React.useCallback(() => setTooltipInfo(undefined), []);
 
-    const onTeamClick = (
+    const onTeamClick = React.useCallback((
         teamId: number,
         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
@@ -65,7 +65,7 @@ const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
             connectionLeft:
                 currentTarget.offsetLeft + currentTarget.offsetWidth / 2 - left,
         });
-    };
+    }, [tooltipInfo?.teamId]);
 
     const cards = React.useMemo(() => {
         const cardCount = Math.ceil(props.teamProducts.length / 3);
@@ -96,7 +96,8 @@ const TeamCardsGroup = (props: TeamCardsGroupProps): JSX.Element => {
         return c;
     }, [tooltipInfo, onTeamClick, props.teamProducts]);
 
-    const style = tooltipInfo ? { '--connection-left': tooltipInfo.connectionLeft + 'px' } as React.CSSProperties : undefined;
+    const style = React.useMemo(() => tooltipInfo?.connectionLeft ? { '--connection-left': tooltipInfo.connectionLeft + 'px' } as React.CSSProperties : undefined,
+        [tooltipInfo?.connectionLeft]);
 
     const total = props.teamProducts.reduce((a: number, b: TeamCard) => a + b.count, 0) || 0;
 

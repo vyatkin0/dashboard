@@ -6,6 +6,8 @@ import { apiUrl } from '../config';
 
 export const tooltipWidth = 928;
 
+const MemoIndicatorsCardGroup = React.memo(IndicatorsCardGroup);
+
 interface TeamCardsTooltipProps {
     teamId: number;
     connectionLeft: number;
@@ -70,7 +72,7 @@ const TeamCardsTooltip = (props: TeamCardsTooltipProps): JSX.Element => {
         const controller = new AbortController();
         const signal = controller.signal;
         dispatch({ type: 'loading', payload: true });
-        fetch(`${apiUrl}/teamstats/${props.teamId}`, { signal }).then(data => {
+        fetch(`${apiUrl('team-stats')}?id=${props.teamId}`, { signal }).then(data => {
             data.json().then(j => {
                 const payload = getTeamCards(j);
                 dispatch({ type: 'loaded', payload });
@@ -85,11 +87,11 @@ const TeamCardsTooltip = (props: TeamCardsTooltipProps): JSX.Element => {
         };
     }, [props.teamId]);
 
-    const tooltipStyle = {
+    const tooltipStyle = React.useMemo(()=>({
         width: tooltipWidth,
         top: props.top,
         left: props.left,
-    };
+    }), [props.top, props.left]);
 
     let content;
     if (teamStats.loading) {
@@ -97,7 +99,7 @@ const TeamCardsTooltip = (props: TeamCardsTooltipProps): JSX.Element => {
     } else if (teamStats.error) {
         content = teamStats.error;
     } else if (teamStats.teamCards) {
-        content = <IndicatorsCardGroup cards={teamStats.teamCards} />;
+        content = <MemoIndicatorsCardGroup cards={teamStats.teamCards} />;
     }
 
     return <div className={styles.tooltip} style={tooltipStyle}>

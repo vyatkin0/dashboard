@@ -4,20 +4,20 @@
     font-size: 20px;
     line-height: 24px;
     padding: 16px;
-    background: white;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.07);
+    background: var(--color-white);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
 
 .card:focus, .card:active, .card:hover {
-    background: #DAE6FE;
-    color: #2E75F5;
+    background: var(--color-active-team-card-background);
+    color: var(--color-active-team-card-text);
     border: none;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08), 0px 0px 6px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1), 0px 0px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card:focus .leader, .card:active .leader, .card:hover .leader{
-    color: #8E8E8E;
+    color: var(--color-active-team-card-leader-text);
 }
 
 .card:hover {
@@ -38,9 +38,9 @@
     text-align: left;
     line-height: 18px;
     padding: 8px;
-    color: #202020;
+    color: var(--color-text);
     width: 100%;
-    background: #FFFFFF;
+    background: var(--color-white);
     border-radius: 5px;
     height: 50px;
     cursor: pointer;
@@ -55,7 +55,7 @@
 .counter {
     float: right;
     font-weight: 500;
-    color: #202020;
+    color: var(--color-text);
 }
 
 .leader {
@@ -64,7 +64,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #BDBDBD;
+    color: var(--color-team-card-leader-text);
 }
 
 .name {
@@ -77,7 +77,7 @@
 
 .rightSpan {
     float: right;
-    color: #2E75F5;
+    color: var(--color-right-text);
     font-size: 14px;
     line-height: 24px;
 }

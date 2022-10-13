@@ -103,7 +103,7 @@ const App = (): JSX.Element => {
         const controller = new AbortController();
         const signal = controller.signal;
         dispatch({ type: 'loading', payload: true })
-        fetch(`${apiUrl}/stats`, { signal }).then(data => {
+        fetch(apiUrl('stats'), { signal }).then(data => {
             data.json().then(payload => dispatch({ type: 'loaded', payload }));
         })
             .catch(e => dispatch({ type: 'error', payload: e.message }))

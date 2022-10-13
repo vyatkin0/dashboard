@@ -17,14 +17,14 @@
     transform: translateX(-50%);
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 20px solid #DAE7FE;
+    border-bottom: 20px solid var(--color-team-tooltip-border);
     bottom: 100%;
     left: var(--connection-left);
 }
 
 .tooltip {
     position: absolute;
-    background-color: #DAE7FE;
+    background-color: var(--color-team-tooltip-background);
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     padding: 24px;

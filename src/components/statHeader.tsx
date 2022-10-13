@@ -14,7 +14,7 @@ const StatHeader = (props: StatHeaderProps): JSX.Element => <div className={styl
         </span>
         {props.title}
     </span>
-    {props.title && props.rightText && <span style={{ color: props.rightColor || '#2E75F5' }}
+    {props.title && props.rightText && <span style={{ color: props.rightColor || 'var(--color-right-text)' }}
         className={styles.rightSpan}>
         {props.rightText}
     </span>}
