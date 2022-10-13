@@ -1,7 +1,7 @@
 # dashboard
 Software development teams dashboard example
 
-It can be checked on [codesandbox](https://k5ibtd-3000.preview.csb.app)
+It can be checked on [codesandbox](https://k1nyvb-3000.preview.csb.app/)
 
 or [imported to codesandbox](https://codesandbox.io/p/github/vyatkin0/dashboard/main)
 
