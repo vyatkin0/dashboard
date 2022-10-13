@@ -13,7 +13,7 @@
 }
 
 .line {
-    background-color: var(--color-background);
+    background-color: var(--color-indicator-background);
     border-radius: 2px;
     height: 12px
 }
