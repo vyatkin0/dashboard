@@ -47,7 +47,7 @@ const Tooltip: React.FC<React.PropsWithChildren<TooltipProps>> = (props) => {
     const [element, setElement] = React.useState<HTMLDivElement>();
     const mousePos = React.useMemo(()=>({top:0, left:0}), []);
 
-    function dispose() {
+    const dispose = React.useCallback(()=>{
         if (element && document.body.contains(element)) {
             document.body.removeChild(element);
         }
@@ -59,7 +59,7 @@ const Tooltip: React.FC<React.PropsWithChildren<TooltipProps>> = (props) => {
         if (opacityTimeoutId) {
             clearTimeout(opacityTimeoutId);
         }
-    }
+    }, [element, timeoutId, opacityTimeoutId]);
 
     function onMouseLeave(event?: React.MouseEvent) {
         dispose();
@@ -111,7 +111,7 @@ const Tooltip: React.FC<React.PropsWithChildren<TooltipProps>> = (props) => {
 
     React.useEffect(() => {
         return dispose;
-    }, []);
+    }, [dispose]);
 
     return <div className={focused ? undefined : styles.body}
         onFocus={() => setFocus(true)}
