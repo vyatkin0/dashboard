@@ -15,7 +15,7 @@ const titles = [new_solutions, new_products, new_components];
 const NewCardsGroup = (props: NewCardsGroupProps): JSX.Element => <>
     <StatHeader image='home' title='Software' rightColor='var(--color-grey)' rightText={`for last ${props.days} days`} />
     <div className={styles.container}>
-        {props.cards.map((card: NewCardProps, n: number) =><Tooltip title={titles[n]} key={n}><NewCard {...card}></NewCard></Tooltip>)}
+        {props.cards.map((card: NewCardProps, n: number) =><Tooltip title={titles[n]} key={n}><NewCard {...card}/></Tooltip>)}
     </div>
 </>;
 
