@@ -1,9 +1,7 @@
 # dashboard
 Software development teams dashboard example
 
-It can be checked on [codesandbox](https://k1nyvb-3000.preview.csb.app/)
-
-or [imported to codesandbox](https://codesandbox.io/p/github/vyatkin0/dashboard/main)
+It can be checked by link https://frontend-ghgwgbpcva-lm.a.run.app/
 
 # Getting Started with Create React App
 
