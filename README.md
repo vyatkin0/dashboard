@@ -3,8 +3,6 @@ Software development teams dashboard example
 
 It can be checked by link https://frontend-ghgwgbpcva-lm.a.run.app/
 
-# Getting Started with Create React App
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
