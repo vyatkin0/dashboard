@@ -1,0 +1,7 @@
+gcloud init
+gcloud auth configure-docker
+
+npm run build
+docker build --progress=plain -t dashboard-frontend .
+docker tag dashboard-frontend gcr.io/teams-dashboard-365307/frontend:latest
+docker push gcr.io/teams-dashboard-365307/frontend:latest
