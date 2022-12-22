@@ -45,8 +45,10 @@ const Tooltip: React.FC<React.PropsWithChildren<TooltipProps>> = (props) => {
     const [timeoutId, setTimeoutId] = React.useState<NodeJS.Timeout>();
     const [opacityTimeoutId, setOpacityTimeoutId] = React.useState<NodeJS.Timeout>();
     const [element, setElement] = React.useState<HTMLDivElement>();
-    const mousePos = React.useMemo(()=>({top:0, left:0}), []);
+    const mousePosRef = React.useRef({top:0, left:0});
 
+    const mousePos = mousePosRef.current;
+    
     const dispose = React.useCallback(()=>{
         if (element && document.body.contains(element)) {
             document.body.removeChild(element);
