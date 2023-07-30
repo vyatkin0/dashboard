@@ -1,7 +1,7 @@
 # dashboard
 Software development teams dashboard example
 
-It can be checked by link https://frontend-ghgwgbpcva-lm.a.run.app/
+It can be checked by link http://github.vyatkin.com/dashboard
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
